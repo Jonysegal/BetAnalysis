@@ -30,6 +30,15 @@ class simpleWinBet:
             )
         )
 
+class simpleFuture:
+    def __init__(self, team, outcome, chance, return):
+        self.team = team
+        self.outcome = outcome
+        self.chance = chance
+        self.return = return
+        self.calculate_odds()
+    def calculate_odds(self):
+        self.dollarReturn = (self.chance * (self.return - 1) - (1-chance))
 
 class bet:
     def __init__(self, description, dollarReturn):
@@ -55,6 +64,9 @@ class betAssembler:
             simpleWinBet.teamTwoDollarReturn,
         )
         self.addBet(y)
+
+    def add_bet_from_simpleFuture(self, simpleFuture):
+        self.addBet(bet("{} to {}".format(simpleFuture.team, self.outcome)))
 
     def sort_and_print(self):
         self.sort_bets()
