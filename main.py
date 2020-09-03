@@ -31,14 +31,14 @@ class simpleWinBet:
         )
 
 class simpleFuture:
-    def __init__(self, team, outcome, chance, return):
+    def __init__(self, team, outcome, chance, winReturn):
         self.team = team
         self.outcome = outcome
         self.chance = chance
-        self.return = return
+        self.winReturn = winReturn
         self.calculate_odds()
     def calculate_odds(self):
-        self.dollarReturn = (self.chance * (self.return - 1) - (1-chance))
+        self.dollarReturn = (self.chance * (self.winReturn - 1) - (1-self.chance))
 
 class bet:
     def __init__(self, description, dollarReturn):
@@ -66,7 +66,7 @@ class betAssembler:
         self.addBet(y)
 
     def add_bet_from_simpleFuture(self, simpleFuture):
-        self.addBet(bet("{} to {}".format(simpleFuture.team, self.outcome)))
+        self.addBet(bet("{} to {}".format(simpleFuture.team, simpleFuture.outcome), simpleFuture.dollarReturn))
 
     def sort_and_print(self):
         self.sort_bets()
@@ -86,9 +86,37 @@ class betAssembler:
 
 assembler = betAssembler()
 
-assembler.add_bets_from_simpleWinBet(simpleWinBet("Heat", "Bucks", .45, 2.7, 1.5))
-assembler.add_bets_from_simpleWinBet(simpleWinBet("Celtics", "Raptors", .59, 1.952, 1.87))
-assembler.add_bets_from_simpleWinBet(simpleWinBet("Jazz", "Nuggets", .44, 2, 1.833))
+assembler.add_bets_from_simpleWinBet(simpleWinBet("Heat", "Bucks", .49, 2.85, 1.444))
+assembler.add_bets_from_simpleWinBet(simpleWinBet("Thunder", "Rockets", .19, 2.95, 1.426))
+assembler.add_bets_from_simpleWinBet(simpleWinBet("Raptors", "Celtics", .43, 1.909, 1.909))
+assembler.add_bets_from_simpleWinBet(simpleWinBet("Nuggets", "Clippers", .33, 4, 1.286))
 
+
+assembler.add_bet_from_simpleFuture(simpleFuture("Celtics", "Win the East", .68, 2.5))
+assembler.add_bet_from_simpleFuture(simpleFuture("Celtics", "Win the Finals", .35, 6.5))
+
+assembler.add_bet_from_simpleFuture(simpleFuture("Clippers", "Win the West", .51, 2.1))
+assembler.add_bet_from_simpleFuture(simpleFuture("Clippers", "Win the Finals", .31, 3.5))
+
+assembler.add_bet_from_simpleFuture(simpleFuture("Rockets", "Win the West", .25, 11))
+assembler.add_bet_from_simpleFuture(simpleFuture("Rockets", "Win the Finals", .14, 17))
+
+assembler.add_bet_from_simpleFuture(simpleFuture("Lakers", "Win the West", .19, 2.1))
+assembler.add_bet_from_simpleFuture(simpleFuture("Lakers", "Win the Finals", .08, 3.5))
+
+assembler.add_bet_from_simpleFuture(simpleFuture("Heat", "Win the East", .15, 4.75))
+assembler.add_bet_from_simpleFuture(simpleFuture("Heat", "Win the Finals", .04, 13))
+
+assembler.add_bet_from_simpleFuture(simpleFuture("Bucks", "Win the East", .10, 2.3))
+assembler.add_bet_from_simpleFuture(simpleFuture("Bucks", "Win the Finals", .03, 5))
+
+assembler.add_bet_from_simpleFuture(simpleFuture("Raptors", "Win the East", .07, 11))
+assembler.add_bet_from_simpleFuture(simpleFuture("Raptors", "Win the Finals", .02, 25))
+
+assembler.add_bet_from_simpleFuture(simpleFuture("Nuggets", "Win the West", .05, 16))
+assembler.add_bet_from_simpleFuture(simpleFuture("Nuggets", "Win the Finals", .02, 31))
+
+assembler.add_bet_from_simpleFuture(simpleFuture("Thunder", "Win the West", .00001, 34))
+assembler.add_bet_from_simpleFuture(simpleFuture("Thunder", "Win the Finals", .0000001, 67))
 
 assembler.sort_and_print()
