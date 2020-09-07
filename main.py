@@ -12,11 +12,11 @@ class simpleWinBet:
 
     def calculate_odds(self):
         self.teamOneDollarReturn = (
-            self.teamOneChance * (self.teamOneWinReturn - 1)
-        ) - (1 - self.teamOneChance)
+            self.teamOneChance * self.teamOneWinReturn ) - 1
+
         self.teamTwoDollarReturn = (
-            (1 - self.teamOneChance) * (self.teamTwoWinReturn - 1)
-        ) - (self.teamOneChance)
+            (1-self.teamOneChance) * self.teamTwoWinReturn) - 1
+
 
     def print_odds(self):
         print(
@@ -38,7 +38,7 @@ class simpleFuture:
         self.winReturn = winReturn
         self.calculate_odds()
     def calculate_odds(self):
-        self.dollarReturn = (self.chance * (self.winReturn - 1) - (1-self.chance))
+        self.dollarReturn = (self.chance * self.winReturn)- 1
 
 class bet:
     def __init__(self, description, dollarReturn):
